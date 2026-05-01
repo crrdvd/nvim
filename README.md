@@ -17,6 +17,8 @@ Configurazione Neovim moderna basata su **Lazy.nvim** con supporto LSP, autocomp
 | **blink.cmp** | Autocompletamento con sorgenti LSP, path, snippet e buffer |
 | **nvim-tree.lua** | File explorer sidebar con icone |
 | **toggleterm.nvim** | Terminale floating all'interno di Neovim |
+| **telescope.nvim** | Fuzzy finder per file, testo, buffer e cronologia (con estensione fzf-native) |
+| **lualine.nvim** | Status line con tema nightfox: modalità, branch, diff, diagnostica, percorso file e posizione |
 
 ### LSP & Language Servers
 
@@ -31,7 +33,7 @@ Language servers installati automaticamente: `lua_ls`, `rust_analyzer`, `clangd`
 
 | Plugin | Descrizione |
 |--------|-------------|
-| **diffview.nvim** | Visualizzazione diff avanzata |
+| **gitsigns.nvim** | Indicatori git nel sign column: righe aggiunte, modificate ed eliminate rispetto all'ultimo commit |
 
 Git interattivo gestito tramite **lazygit** (esterno, avviabile dal terminale floating).
 
@@ -51,12 +53,11 @@ Git interattivo gestito tramite **lazygit** (esterno, avviabile dal terminale fl
 
 | Plugin | Descrizione |
 |--------|-------------|
-| **nightfox.nvim** | Colorscheme attivo (variante carbonfox) |
-| **tokyonight.nvim** | Colorscheme alternativo (disabilitato) |
+| **nightfox.nvim** | Colorscheme attivo (variante nightfox) |
 
 ### Dipendenze
 
-`lazy.nvim` · `plenary.nvim` · `snacks.nvim` · `telescope.nvim` · `nvim-web-devicons` · `friendly-snippets`
+`lazy.nvim` · `plenary.nvim` · `nvim-web-devicons` · `telescope-fzf-native.nvim` · `friendly-snippets`
 
 ---
 
