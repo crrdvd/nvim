@@ -31,14 +31,14 @@ Language servers installati automaticamente: `lua_ls`, `rust_analyzer`, `clangd`
 
 | Plugin | Descrizione |
 |--------|-------------|
-| **neogit** | Client Git interattivo con UI stile Magit |
 | **diffview.nvim** | Visualizzazione diff avanzata |
+
+Git interattivo gestito tramite **lazygit** (esterno, avviabile dal terminale floating).
 
 ### Note-taking & Markdown
 
 | Plugin | Descrizione |
 |--------|-------------|
-| **obsidian.nvim** | Integrazione con vault Obsidian in `~/notes/vault` |
 | **render-markdown.nvim** | Rendering markdown formattato nel buffer |
 
 ### AI Assistant
@@ -127,11 +127,9 @@ Attivi quando un language server e' collegato al buffer.
 |-------|-----------|--------|
 | `Ctrl+\` | Normal / Terminal | Apri/chiudi terminale floating |
 
-### Git (neogit)
+### Git (lazygit)
 
-| Tasto | Azione |
-|-------|--------|
-| `Space gg` | Apri interfaccia Git (Neogit) |
+Lazygit viene aperto dal terminale floating (`Ctrl+\`).
 
 ### Claude Code (AI)
 
