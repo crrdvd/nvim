@@ -8,6 +8,7 @@ map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find files" })
 map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Live grep" })
 map("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Find buffers" })
 map("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Recent files" })
+map("n", "<leader>fG", "<cmd>Telescope live_grep additional_args=--no-ignore<cr>", { desc = "Live grep --no-ignore" })
 
 -- Buffers
 map("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next buffer" })
