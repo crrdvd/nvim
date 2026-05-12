@@ -1,5 +1,10 @@
 vim.opt.guicursor = ""
 
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldcolumn = "1" -- Mostra una colonna a sinistra per indicare i fold
+vim.opt.foldlevel = 99   -- Inizia con tutti i blocchi aperti
+
 vim.opt.number = true
 vim.opt.relativenumber = true
 
