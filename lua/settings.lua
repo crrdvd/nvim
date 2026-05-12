@@ -5,6 +5,21 @@ vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldcolumn = "1" -- Mostra una colonna a sinistra per indicare i fold
 vim.opt.foldlevel = 99   -- Inizia con tutti i blocchi aperti
 
+vim.opt.fillchars = {
+  fold = " ",      -- Rimuove i puntini di sospensione sulla riga foldata
+  foldopen = "",  -- Icona per fold aperto
+  foldsep = " ",   -- Rimuove la linea verticale di separazione
+  foldclose = "", -- Icona per fold chiuso
+}
+
+function CustomFoldText()
+  local line = vim.fn.getline(vim.v.foldstart)
+  local line_count = vim.v.foldend - vim.v.foldstart + 1
+  return line .. " … (" .. line_count .. " righe)"
+end
+
+vim.opt.foldtext = "v:lua.CustomFoldText()"
+
 vim.opt.number = true
 vim.opt.relativenumber = true
 
