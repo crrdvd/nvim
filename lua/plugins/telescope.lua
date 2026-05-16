@@ -28,6 +28,7 @@ return {
                         ["dd"] = delete_file,
                     },
                 },
+                path_display = { "smart" },
             },
         })
 
