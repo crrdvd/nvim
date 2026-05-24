@@ -16,9 +16,7 @@ return {
         renderer = {
             group_empty = true,
         },
-        filters = {
-            dotfiles = true,
-        },
+        hijack_cursor = true,
       }
     end,
 }
