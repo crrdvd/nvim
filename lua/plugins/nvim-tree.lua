@@ -17,6 +17,9 @@ return {
             group_empty = true,
         },
         hijack_cursor = true,
+        git = {
+          ignore = false
+        },
       }
     end,
 }
