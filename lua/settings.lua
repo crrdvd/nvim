@@ -76,13 +76,6 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
-vim.diagnostic.config({
-  virtual_text = true,  -- Enable inline virtual text
-  signs = true,         -- Show icons in the sign column
-  underline = true,
-  update_in_insert = false,
-})
-
 ---------------
 ----KEYMAPS----
 ---------------
