@@ -1,17 +1,31 @@
 return {
     {
-        "williamboman/mason.nvim",
+        "mason-org/mason.nvim",
         config = function()
             require("mason").setup()
         end,
     },
     {
-        "williamboman/mason-lspconfig.nvim",
+        "mason-org/mason-lspconfig.nvim",
         dependencies = {
-            "williamboman/mason.nvim",
+            "mason-org/mason.nvim",
             "neovim/nvim-lspconfig",
         },
         config = function()
+            -- Capabilities di default per tutti i server (blink.cmp)
+            vim.lsp.config("*", {
+                capabilities = require("blink.cmp").get_lsp_capabilities(),
+            })
+
+            -- Override per singolo server
+            vim.lsp.config("lua_ls", {
+                settings = {
+                    Lua = {
+                        diagnostics = { globals = { "vim" } },
+                    },
+                },
+            })
+
             require("mason-lspconfig").setup({
                 ensure_installed = {
                     "lua_ls",
@@ -19,24 +33,10 @@ return {
                     "clangd",
                     "ts_ls",
                     "pyright",
+                    "tinymist",
                 },
-                handlers = {
-                    function(server_name)
-                        require("lspconfig")[server_name].setup({
-                            capabilities = require("blink.cmp").get_lsp_capabilities(),
-                        })
-                    end,
-                    ["lua_ls"] = function()
-                        require("lspconfig").lua_ls.setup({
-                            capabilities = require("blink.cmp").get_lsp_capabilities(),
-                            settings = {
-                                Lua = {
-                                    diagnostics = { globals = { "vim" } },
-                                },
-                            },
-                        })
-                    end,
-                },
+                -- automatic_enable = true (default): i server installati vengono
+                -- abilitati automaticamente tramite vim.lsp.enable()
             })
         end,
     },
