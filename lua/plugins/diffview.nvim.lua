@@ -1,6 +1,12 @@
 return {
   "sindrets/diffview.nvim",
-  dependencies = {},
-  config = function()
-  end,
+  dependencies = { "nvim-lua/plenary.nvim" },
+  cmd = {
+    "DiffviewOpen",
+    "DiffviewClose",
+    "DiffviewToggleFiles",
+    "DiffviewFocusFiles",
+    "DiffviewFileHistory",
+    "DiffviewRefresh",
+  },
 }

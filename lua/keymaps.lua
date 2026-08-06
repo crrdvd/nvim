@@ -28,17 +28,22 @@ map("t", "<C-k>", "<C-\\><C-n><C-w>k", { desc = "Move to upper window" })
 map("t", "<C-l>", "<C-\\><C-n><C-w>l", { desc = "Move to right window" })
 
 -- LSP (attivati solo quando un language server è collegato al buffer)
+--
+-- Neovim 0.11 definisce già di default: grn (rename), gra (code action),
+-- grr (references), gri (implementation), grt (type definition), gO (symbols).
+-- Non rimappare `gr`: renderebbe irraggiungibile tutto il prefisso `gr*`.
+-- Stesso discorso per `gi`, che di base rientra in insert all'ultima modifica.
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)
         local opts = { buffer = args.buf }
         map("n", "gd", vim.lsp.buf.definition, vim.tbl_extend("force", opts, { desc = "Go to definition" }))
-        map("n", "gr", vim.lsp.buf.references, vim.tbl_extend("force", opts, { desc = "Find references" }))
-        map("n", "gi", vim.lsp.buf.implementation, vim.tbl_extend("force", opts, { desc = "Go to implementation" }))
         map("n", "K", vim.lsp.buf.hover, vim.tbl_extend("force", opts, { desc = "Hover documentation" }))
         map("n", "<leader>rn", vim.lsp.buf.rename, vim.tbl_extend("force", opts, { desc = "Rename symbol" }))
         map("n", "<leader>ca", vim.lsp.buf.code_action, vim.tbl_extend("force", opts, { desc = "Code action" }))
         map("n", "<leader>d", vim.diagnostic.open_float, vim.tbl_extend("force", opts, { desc = "Show diagnostic" }))
-        map("n", "[d", vim.diagnostic.goto_prev, vim.tbl_extend("force", opts, { desc = "Previous diagnostic" }))
-        map("n", "]d", vim.diagnostic.goto_next, vim.tbl_extend("force", opts, { desc = "Next diagnostic" }))
+        map("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end,
+            vim.tbl_extend("force", opts, { desc = "Previous diagnostic" }))
+        map("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end,
+            vim.tbl_extend("force", opts, { desc = "Next diagnostic" }))
     end,
 })

@@ -1,16 +1,19 @@
-vim.g.gitblame_display_virtual_text = 0 -- Disable virtual text
-local git_blame = require('gitblame')
-
 return {
   "nvim-lualine/lualine.nvim",
-  dependencies = { "nvim-tree/nvim-web-devicons" },
+  -- git-blame è una dipendenza reale: il componente lualine_x usa le sue funzioni.
+  -- Dichiararla qui garantisce che sia caricata e configurata prima di questo config.
+  dependencies = { "nvim-tree/nvim-web-devicons", "f-person/git-blame.nvim" },
   config = function()
+    -- Il require sta qui, non a livello di file: al top-level girerebbe durante il
+    -- parsing degli spec di lazy.nvim, forzando il caricamento di git-blame a startup.
+    local git_blame = require("gitblame")
+
     require("lualine").setup({
       options = {
         theme = "auto",
         globalstatus = true,
         component_separators = { left = "", right = "" },
-        section_separators = { left = "", right = "" },
+        section_separators = { left = "", right = "" },
       },
       sections = {
         lualine_a = { "mode" },

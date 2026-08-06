@@ -1,5 +1,6 @@
 return {
     'nvim-telescope/telescope.nvim', version = '*',
+    cmd = 'Telescope',
     dependencies = {
         'nvim-lua/plenary.nvim',
         -- optional but recommended
@@ -13,11 +14,24 @@ return {
         local delete_file = function(prompt_bufnr)
             local selection = action_state.get_selected_entry()
             if not selection then return end
-            local confirm = vim.fn.input("Delete " .. selection.path .. "? [y/n]: ")
-            if confirm == "y" then
-                actions.close(prompt_bufnr)
-                vim.fn.delete(selection.path)
-                print("Deleted: " .. selection.path)
+
+            -- Attenzione: il picker `buffers` non popola `path`, solo `filename`.
+            local path = selection.path or selection.filename
+            if not path then
+                vim.notify("Nessun percorso associato a questa selezione", vim.log.levels.WARN)
+                return
+            end
+
+            if vim.fn.confirm("Eliminare " .. path .. "?", "&Si\n&No", 2) ~= 1 then return end
+
+            local flags = vim.fn.isdirectory(path) == 1 and "rf" or ""
+            if vim.fn.delete(path, flags) == 0 then
+                vim.notify("Eliminato: " .. path, vim.log.levels.INFO)
+                -- Ricarica la lista senza chiudere il picker
+                local picker = action_state.get_current_picker(prompt_bufnr)
+                if picker then picker:refresh(nil, { reset_prompt = false }) end
+            else
+                vim.notify("Impossibile eliminare: " .. path, vim.log.levels.ERROR)
             end
         end
 
@@ -32,6 +46,10 @@ return {
             },
         })
 
-        telescope.load_extension('fzf')
+        -- Se la build di fzf-native è fallita, non far esplodere tutta la config
+        local ok, err = pcall(telescope.load_extension, 'fzf')
+        if not ok then
+            vim.notify("telescope-fzf-native non caricata: " .. tostring(err), vim.log.levels.WARN)
+        end
     end,
 }

@@ -1,0 +1,9 @@
+# Stato locale di Neovim, non va versionato
+spell/
+.netrwhist
+shada/
+*.shada
+
+# Artefatti di build dei plugin compilati localmente
+**/build/
+*.so

@@ -6,11 +6,11 @@ return {
     config = function()
       require("nightfox").setup({
         options = {
-          transparent = true,
+          transparent = false,
           styles = {
-            commments = "italic",
+            comments = "italic",
             keywords = "bold",
-            tyoes = "italic,bold",
+            types = "italic,bold",
           }
         },
         palettes = {
@@ -19,6 +19,6 @@ return {
           },
         },
       })
-      vim.cmd([[colorscheme carbonfox]])
+      vim.cmd([[colorscheme dayfox]])
     end,
 }

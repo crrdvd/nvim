@@ -1,15 +1,20 @@
 return {
     {
         "mason-org/mason.nvim",
+        cmd = { "Mason", "MasonInstall", "MasonUpdate", "MasonLog" },
         config = function()
             require("mason").setup()
         end,
     },
     {
         "mason-org/mason-lspconfig.nvim",
+        event = { "BufReadPre", "BufNewFile" },
         dependencies = {
             "mason-org/mason.nvim",
             "neovim/nvim-lspconfig",
+            -- get_lsp_capabilities() viene chiamata qui sotto: dipendenza esplicita,
+            -- altrimenti funziona solo finché blink.cmp si carica per conto suo.
+            "saghen/blink.cmp",
         },
         config = function()
             -- Capabilities di default per tutti i server (blink.cmp)
