@@ -8,7 +8,20 @@ map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find files" })
 map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Live grep" })
 map("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Find buffers" })
 map("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Recent files" })
-map("n", "<leader>fG", "<cmd>Telescope live_grep additional_args=--no-ignore<cr>", { desc = "Live grep --no-ignore" })
+-- Varianti che includono anche i percorsi elencati in .ignore/.rgignore
+-- (--no-ignore-dot: .gitignore resta rispettato, quindi niente build/dist/deps)
+map("n", "<leader>fG", function()
+    require("telescope.builtin").live_grep({
+        prompt_title = "Live Grep (incl. .ignore)",
+        additional_args = { "--no-ignore-dot" },
+    })
+end, { desc = "Live grep (include .ignore)" })
+map("n", "<leader>fF", function()
+    require("telescope.builtin").find_files({
+        prompt_title = "Find Files (incl. .ignore)",
+        find_command = { "rg", "--files", "--color", "never", "--no-ignore-dot" },
+    })
+end, { desc = "Find files (include .ignore)" })
 
 -- Buffers
 map("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next buffer" })

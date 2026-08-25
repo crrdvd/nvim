@@ -48,6 +48,9 @@ vim.opt.mouse = "nvi"
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+-- disabilita valutazione di .editorconfig
+vim.g.editorconfig = false
+
 -- for always copy to clipboard
 vim.o.clipboard = "unnamedplus"
 
