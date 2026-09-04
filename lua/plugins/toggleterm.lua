@@ -14,7 +14,10 @@ return {
         term2:toggle()
       end,
       desc = "Toggle Terminal #2",
-      mode = { "n", "t" },
+      -- Solo normal mode: con mode = "t" lo spazio diventa un prefisso di
+      -- mapping anche nel terminale, e ogni spazio (es. in lazygit) resta
+      -- in attesa di 'timeoutlen' prima di essere inviato al processo.
+      mode = "n",
     },
 
     -- Esempio: terminale float dedicato per Lazygit
