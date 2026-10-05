@@ -39,7 +39,7 @@ return {
         limit = 10,
         icon = " ",
         label = " File recenti:",
-        cwd_only = false,
+        cwd_only = true,
       },
       footer = {},
     },
